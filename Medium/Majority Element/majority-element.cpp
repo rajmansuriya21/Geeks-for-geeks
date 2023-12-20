@@ -10,37 +10,20 @@ using namespace std;
 
 class Solution{
   public:
-     // Function to find majority element in the array
-    // a: input array
-    // size: size of input array
     int majorityElement(int a[], int size)
-    { if (size == 1 && a[0] > size/2) {
-            return a[0];
+    {  int cnt=0,elm=-1;
+        for(int i=0;i<size;i++){
+            if(cnt==0) elm=a[i];
+            if(a[i]==elm) cnt++;
+            else cnt--;
         }
-        int max_size = size;
-        for (int i =0; i<size; i++) {
-            if (a[i] >= max_size) {
-                max_size = a[i];
-            }
+        cnt=0;
+        for(int i=0;i<size;i++) {
+            if(a[i]==elm) cnt++;
         }
-        bool is_present = false;
-        int output;
-        int fre_arr[max_size] = {0};
-        for (int i=0; i<size; i++) {
-            fre_arr[a[i]]++;
-        }
-        for (int i=0; i<max_size; i++) {
-            if(fre_arr[i] > size/2 ) {
-                is_present = true;
-                output = i;
-                break;
-            }
-        }
-        if (is_present) {
-            return output;
-        } else {
-            return -1;
-        }
+
+        if(cnt>floor(size/2)) return elm;
+        return -1;
     }
 };
 
