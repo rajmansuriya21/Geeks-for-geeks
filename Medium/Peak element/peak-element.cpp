@@ -12,12 +12,24 @@ using namespace std;
 class Solution
 {
     public:
-    int peakElement(int arr[], int n)
+   int peakElement(int arr[], int n)
     {
-       for(int i=0 ; i<n-1 ; i++){
-           if(arr[i]>arr[i+1])  return i;
-       }
-       return n-1;
+       //edge case
+        if (n == 1)
+            return 0;
+        int low = 0;
+        int high = n - 1;
+        
+        // Perform binary search to find a peak element.
+        while (low < high) {
+            int mid = low + ((high - low) >> 1);
+            if (arr[mid] >= arr[mid + 1])
+                high = mid;
+            else
+                low = mid + 1;
+        }
+        return low;
+        
     }
 };
 
@@ -62,4 +74,4 @@ int main() {
 
 	return 0;
 }
-// } Driver Code Endshttps://media.geeksforgeeks.org/img-practice/prod/courses/5/Web/Content/Clock-4_1706701529.gif
+// } Driver Code Ends
