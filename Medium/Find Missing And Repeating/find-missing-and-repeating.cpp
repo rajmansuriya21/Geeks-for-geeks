@@ -6,21 +6,19 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
 public:
-    vector<int> findTwoElement(vector<int> arr, int n) {
-        vector<int> cntr(n+1,0);
-        int B, A;
-        
-        for(int i = 0; i<n; ++i){
-            cntr[arr[i]]++;
-            if(cntr[arr[i]] ==2)
-                B = arr[i];
+    vector<int> findTwoElement(vector<int> a, int n) {
+        long long int asum = 1ll*n * (n + 1) / 2;
+        long long int asumsqr = 1ll*n * (n + 1) * (2 * n + 1) / 6;
+    
+        long long int sum = 0, sumsqr = 0;
+        for (int i = 0; i < n; i++) {
+            sum += a[i];
+            sumsqr += 1ll*a[i] * a[i];
         }
-        
-        for(int i = 1; i<=n; ++i)
-            if(cntr[i] == 0)
-                A = i;
-                
-        return {B,A};
+    
+        int sub = sum - asum;//b - a
+        int add = (sumsqr - asumsqr) / sub;//b + a
+        return {(add + sub) / 2, (add - sub) / 2};
     }
 };
 
